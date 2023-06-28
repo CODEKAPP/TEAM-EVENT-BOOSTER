@@ -57,7 +57,18 @@
       margin-right: 5px;
     }
   }
+  &__lat,
+  &__long,
+  &__price,
+  &__vip,
+  &__buy,
+  &__time,
+  &__local,
+  &__info {
+    display: none;
+  }
 }
+
 @media screen and (max-width: 480px) {
   .gallery {
     &__card {
@@ -86,6 +97,7 @@
     }
   }
 }
+
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .gallery {
     &__card {
@@ -114,6 +126,7 @@
     }
   }
 }
+
 .gallery__image:hover {
   box-shadow: 0 0 4px $color-primary, 0 0 11px $color-primary,
     0 0 19px $color-primary, 0 0 40px $color-quaternary,
