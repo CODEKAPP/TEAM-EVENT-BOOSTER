@@ -137,8 +137,6 @@ export function renderEvents(events) {
     card.classList.add('gallery__card');
     card.setAttribute('data-modal-open', ''); // Agregar atributo para abrir el modal al hacer clic
 
-
-
     // Agregar evento de clic a la tarjeta para abrir el modal
     card.addEventListener('click', () => openModalOnCardClick(card));
 
@@ -156,11 +154,11 @@ export function renderEvents(events) {
     date.classList.add('gallery__date');
     date.textContent = event.date;
 
-        const place = document.createElement('p');
-        place.classList.add('gallery__place');
-        place.textContent = event.place;
+    const place = document.createElement('p');
+    place.classList.add('gallery__place');
+    place.textContent = event.place;
 
-    const time = document.createElement('p');
+    /* const time = document.createElement('p');
     time.classList.add('gallery__time');
     time.textContent = event.dateTimes;
 
@@ -190,7 +188,7 @@ export function renderEvents(events) {
 
     const info = document.createElement('p');
     info.classList.add('gallery__info');
-    info.textContent = event.info;
+    info.textContent = event.info; */
 
     const border = document.createElement('div');
     border.classList.add('gallery__border');
@@ -199,14 +197,14 @@ export function renderEvents(events) {
     card.appendChild(title);
     card.appendChild(date);
     card.appendChild(place);
-    card.appendChild(time);
+    /*     card.appendChild(time);
     card.appendChild(placeLocal);
     card.appendChild(localLat);
     card.appendChild(localLong);
     card.appendChild(prices);
     card.appendChild(pricesVIPS);
     card.appendChild(buyTicket);
-    card.appendChild(info);
+    card.appendChild(info); */
     cardBox.appendChild(card);
     gallery.appendChild(cardBox);
     cardBox.appendChild(border);
