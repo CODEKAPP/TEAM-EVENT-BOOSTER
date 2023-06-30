@@ -1,12 +1,12 @@
-import arrow from './js/arrow'
-import config from './js/config'
-import modal from './js/modal'
-import paises from './js/paises'
-import render from './js/render'
-import renderEvents from './js/renderEvents'
-import renderPagination from './js/renderPagination'
-import search from './js/search'
-import utils from './js/utils'
+import config from './js/config';
+import arrow from './js/arrow';
+import modal from './js/modal';
+import paises from './js/paises';
+// import render from './js/render';
+import renderEvents from './js/renderEvents';
+import renderPagination from './js/renderPagination';
+import search from './js/search';
+// import utils from './js/utils';
 
 // Importar las variables de configuración desde el archivo "./config"
 import { fetchEventsName, fetchEvents2 } from './js/search';
