@@ -176,7 +176,7 @@ function openModalOnCardClick(card) {
   dataModalBuyPriceStandar.appendChild(modalBuy);
   dataModalBuyPriceVip.appendChild(modalVIP);
   dataModalBuyPriceVip.appendChild(modalBuyVIP);
-  
+
   // modalBox.appendChild(cardModal);
   modalBox.appendChild(dataModalSmall);
   modalBox.appendChild(dataModal);
