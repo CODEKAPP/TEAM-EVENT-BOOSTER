@@ -1,59 +1,31 @@
 @import '../utils/variables';
 @import '../utils/mixins';
 
-.backdrop {
-  background-color: $color-nineth;
+.gallery {
   width: 100%;
-  height: 100%;
-  z-index: 10;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-}
-
-.is-hidden {
-  visibility: hidden;
-  opacity: 1;
-  pointer-events: all;
-  display: none;
-}
-
-.modal {
-  font-family: $montserrat;
-  border-radius: 300px 0px;
-  background-color: $background-color-tertiary;
-  z-index: 20;
-  display: block;
-  // justify-content: end;
-  // align-items: start;
-  &__container {
-    display: flex;
-    flex-direction: row-reverse;
-  }
-}
-
-.close {
-  width: 25px;
-  height: 25px;
-  background-color: $background-color-tertiary;
-  margin: 32px;
-  border: $background-color-tertiary;
-}
-
-.gallery__modal {
+  justify-content: space-around;
+  flex-wrap: wrap;
   &__box {
-    display: flex;
-    // flex-direction: row-reverse;
-    margin: 5px;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 200px;
+    margin-right: 35px;
+    margin-left: 35px;
   }
   &__card {
-    padding: 40px;
-    margin: 40px;
+    width: 267px;
+    height: 370px;
+    position: absolute;
+    z-index: 2;
+    transition: transform 0.5s linear;
+  }
+  &__border {
+    position: relative;
+    width: 227px;
+    height: 213px;
+    border-radius: 50px 0px;
+    border: 1px solid $rgba-color-tertiary;
+    transform: translate(61px, -26px);
+    z-index: 1;
   }
   &__image {
     width: 267px;
@@ -69,36 +41,130 @@
     font-weight: 700;
   }
   &__date {
-    color: $color-secondary;
+    color: $color-primary;
     text-align: center;
     font-size: 16px;
     font-family: $montserrat;
   }
   &__place {
-    color: $color-secondary;
+    color: $color-primary;
     text-align: center;
     font-size: 14px;
     font-family: $montserrat;
     font-weight: 600;
     &::before {
-      content: url('../images/location.svg');
+      content: url('../images/Vector.svg');
       display: inline-block;
       margin-right: 5px;
     }
   }
-  &__data {
-    display: flex;
+}
+@media screen and (max-width: 480px) {
+  .modal {
+    height: auto;
+    overflow-y: auto;
+  }
+  .gallery {
+    &__card {
+      width: 100px;
+      height: 120px;
+    }
+    &__border {
+      width: 102px;
+      height: 95px;
+      transform: translate(40px, -20px);
+    }
+    &__image {
+      width: 120px;
+      height: 120px;
+    }
+    &__title {
+      font-size: 14px;
+      width: 130px;
+    }
+    &__date {
+      font-size: 14px;
+      width: 130px;
+    }
+    &__place {
+      font-size: 12px;
+    }
+  }
+  .gallery_modaldata_info {
+    max-height: 400px;
   }
 }
-.modalPlace:hover {
-  cursor: url('../images/location.svg'), auto;
-  //   width: 20px;
-  //   height: 20px;
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .modal {
+    height: auto;
+    overflow-y: auto;
+  }
+  .gallery {
+    &__card {
+      width: 150px;
+      height: 120px;
+    }
+    &__border {
+      width: 120px;
+      height: 112px;
+      transform: translate(40px, -20px);
+    }
+    &__image {
+      width: 141px;
+      height: 120px;
+    }
+    &__title {
+      font-size: 16px;
+      width: 152px;
+    }
+    &__date {
+      font-size: 16px;
+      width: 152px;
+    }
+    &__place {
+      font-size: 14px;
+    }
+  }
+}
+.gallery__image:hover {
+  box-shadow: 0 0 4px $color-primary, 0 0 11px $color-primary,
+    0 0 19px $color-primary, 0 0 40px $color-quaternary,
+    0 0 80px $color-quaternary, 0 0 90px $color-quaternary;
+}
+.gallery__card:hover {
+  transform: scale(1.1);
 }
 
-.gallery__modal__price::before,
-.gallery__modal__vip::before {
-  content: url('../images/code.svg');
-  display: inline-block;
-  margin-right: 5px;
+.gallery {
+  &__lat,
+  &__long,
+  &__price,
+  &__vip,
+  &__buy,
+  &__time,
+  &__local,
+  &__info {
+    display: none;
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+  }
+}
+.gallery__modal__data__buy {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+.gallery__modal__data__buy-Price {
+  display: flex;
+}
+.gallery__modal__info {
+  height: auto;
+  max-height: 50px;
+  overflow-y: auto;
+  margin: 0;
+}
+@media screen and (min-width: 768px) {
+  .gallery__modaldata__info {
+    max-height: 250px;
+  }
 }

@@ -1,79 +1,44 @@
-// Importar las variables de configuración desde el archivo "./config"
-import { API_URL, API_KEY } from './js/config';
+import { fetchEvents, } from './js/utils';
+import { selecPaises } from './js/paises';
+import { animation } from './js/arrow';
+import { toggleModal } from './js/modal';
+const select = document.querySelector(".header__inputs-2");
+const input= document.querySelector(".header__inputs-1");
+let pageNumber = 1;
+let searhInput = document.querySelector('.header__inputs-1').value;
 
-// Petición de eventos
-export function fetchEvents(pageSize, pageNumber) {
-  const queryParams = new URLSearchParams({
-    apikey: API_KEY,
-    locale: '*',
-    includeImages: 'yes',
-    size: pageSize,
-    page: pageNumber,
-  });
+const options = {
+  countryCode: 'US',
+  keyword: searhInput,
+};
+// toggleModal();
+animation();
+fetchEvents(pageNumber, options);
 
-  return fetch(`https://${API_URL}?${queryParams}`)
-    .then(response => response.json())
-    .then(data => {
-      const events = formatEvents(data._embedded.events); // Formatear los eventos
-      const totalPages = Math.ceil(data.page.totalElements / pageSize);
-      return { events, totalPages };
-    })
-    .catch(error => {
-      console.log(error);
-      throw new Error('Error al obtener los eventos');
-    });
+for (let i = 0; i < selecPaises.length; i++) {
+  let opcion = document.createElement('option');
+  opcion.value = selecPaises[i].clave;
+  opcion.text = selecPaises[i].nombre;
+  select.appendChild(opcion);
 }
 
-// Función para formatear los eventos y extraer la información necesaria
-export function formatEvents(events) {
-  return events.map(event => {
-    const defaultImageUrl = 'https://via.placeholder.com/150'; // URL de imagen por defecto
-    let imageUrl = defaultImageUrl;
-    let eventInfo = ''; // Variable para almacenar la información del evento
+input.addEventListener('blur', () => {
+  let searhInput = document.querySelector('.header__inputs-1').value;
+  // searchPais = '*';
+  const options = {
+    countryCode: 'US',
+    keyword: searhInput,
+  };
+  fetchEvents(pageNumber, options);
+});
 
-    if (event.images && event.images.length > 0) {
-      for (let image of event.images) {
-        if (image.url) {
-          imageUrl = image.url;
-          break; // Escapar del bucle una vez que se encuentre una URL de imagen válida
-        }
-      }
-    }
+select.addEventListener('change', () => {
+  let searhInput = document.querySelector('.header__inputs-1').value;
+  let searchPais = document.querySelector('.header__inputs-2').value;
+  const options = {
+    countryCode: searchPais.toUpperCase(),
+    keyword: searhInput,
+  };
+  fetchEvents(pageNumber, options);
+});
 
-    if (event.info) {
-      eventInfo = event.info;
-    }
-    if (event.url) {
-      eventsUrl = event.url;
-    }
-    if (event._embedded.venues[0].markets) {
-      localPlaces = event._embedded.venues[0].markets[0].name;
-    }
-    if (event.priceRanges) {
-      pricesStandars =
-        event.priceRanges[0].min + ' ' + event.priceRanges[0].currency;
-      pricesVIPS =
-        event.priceRanges[0].max + ' ' + event.priceRanges[0].currency;
-    }
-    if (event._embedded.venues[0].location) {
-      locationlat = event._embedded.venues[0].location.latitude;
-
-      locationLong = event._embedded.venues[0].location.longitude;
-    }
-
-    return {
-      name: event.name,
-      date: event.dates.start.localDate,
-      dateTimes: event.dates.start.localTime + ' ' + event.dates.timezone,
-      place: event._embedded.venues[0].name,
-      image: imageUrl,
-      info: eventInfo,
-      localPlace: localPlaces,
-      latitude: locationlat,
-      longitude: locationLong,
-      pricesStandar: pricesStandars,
-      pricesVIP: pricesVIPS,
-      buyTickets: eventsUrl,
-    };
-  });
-}
